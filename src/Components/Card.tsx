@@ -28,10 +28,8 @@ const Card = ({ cardDetails }: any) => {
         <div className="card-name-expiry">
           <div className="cardname">{cardName.toLocaleUpperCase()}</div>
           <div className="expiry">
-            {!cardDetails.expiryDate.month
-              ? "MM"
-              : cardDetails.expiryDate.month}
-            /{cardDetails.expiryDate.year ? cardDetails.expiryDate.year : "YY"}
+            {!cardDetails.month ? "MM" : cardDetails.month}/
+            {cardDetails.year ? cardDetails.year : "YY"}
           </div>
         </div>
       </div>

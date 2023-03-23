@@ -6,10 +6,10 @@ import Cardback from "./Components/Cardback";
 interface cardDetails {
   cardnumber: string;
   cardname: string;
-  expiryDate: {
-    month: string;
-    year: string;
-  };
+
+  month: string;
+  year: string;
+
   cvv: string;
 }
 
@@ -17,10 +17,8 @@ function App() {
   const [cardDetails, setCardDetails] = useState<cardDetails>({
     cardname: "",
     cardnumber: "",
-    expiryDate: {
-      month: "",
-      year: "",
-    },
+    month: "",
+    year: "",
     cvv: "",
   });
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +67,7 @@ function App() {
                   type="number"
                   className="inputField"
                   name={"month"}
-                  value={cardDetails.expiryDate.month}
+                  value={cardDetails.month}
                   placeholder="MM"
                   min={0}
                   max={12}
@@ -80,7 +78,7 @@ function App() {
                   className="inputField"
                   placeholder="YY"
                   name={"year"}
-                  value={cardDetails.expiryDate.year}
+                  value={cardDetails.year}
                   onChange={handleChange}
                 />
               </div>
