@@ -50,7 +50,7 @@ body{
 
 .App{
     min-width:100%;
-    max-height: fit-content;
+    max-height: 100vh;
     
     /* display: flex;
     flex-direction: column;
