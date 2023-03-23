@@ -1,9 +1,11 @@
 import React from "react";
-
-const Cardback = () => {
+interface cvv {
+  cvv: string;
+}
+const Cardback = ({ cvv }: cvv) => {
   return (
     <div className="cardBack card">
-      <div className="cvv">000</div>
+      <div className="cvv">{cvv ? cvv : "123"}</div>
     </div>
   );
 };
