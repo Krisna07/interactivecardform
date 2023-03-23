@@ -1,0 +1,129 @@
+.card {
+  /* max-width: 80em;
+  max-height: 80em;
+  min-width: 80em;
+  min-height: 80em; */
+  width: 700px;
+  height: 400px;
+  /* scale: 1; */
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  padding: 3rem;
+  box-sizing: border-box;
+  box-shadow: 0px 0px 8px 8px rgba(10, 10, 10, 0.096);
+  position: absolute;
+  /* padding: 5px; */
+}
+
+.cardFront {
+  background-image: url(../images/bg-card-front.png);
+  justify-content: space-between;
+
+  z-index: 10;
+
+  left: 5%;
+  bottom: -20%;
+  /* right: -30%; */
+}
+.cardBack {
+  background-image: url(../images/bg-card-back.png);
+  justify-content: center;
+
+  right: 5%;
+  top: 15%;
+
+  /* right: -50%; */
+}
+
+.cardTop {
+  width: 100%;
+  /* background-color: black; */
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  /* scale: 1.5; */
+}
+.cardBottom {
+  width: 100%;
+  height: 50%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* background-color: rgb(51, 48, 43); */
+}
+.circleBig {
+  width: 80px;
+  height: 80px;
+  /* scale: 1.5; */
+  border-radius: 50%;
+  background-color: white;
+}
+.circleSmall {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.cardNumberContainer {
+  width: 100%;
+  font-size: 44px;
+
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 4px;
+  /* background-color: rgb(30, 36, 36); */
+}
+.card-name-expiry {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  letter-spacing: 2px;
+  word-spacing: 4px;
+}
+.cvv {
+  width: 80%;
+  align-items: center;
+  text-align: right;
+  letter-spacing: 2px;
+}
+
+@media (min-width: 1400px) {
+  .card {
+    width: 550px;
+    height: 300px;
+  }
+  .circleBig {
+    width: 50px;
+    height: 50px;
+  }
+  .circleSmall {
+    width: 25px;
+    height: 25px;
+  }
+  .card {
+    position: relative;
+  }
+  .cardFront {
+    top: 0;
+    left: 25%;
+  }
+  .cardBack {
+    right: -50%;
+    top: 3rem;
+  }
+  .cardNumberContainer {
+    font-size: 34px;
+  }
+  .card-name-expiry {
+    font-size: 18px;
+  }
+}
