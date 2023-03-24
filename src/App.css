@@ -114,6 +114,7 @@ body{
     font-size: 2em;
     letter-spacing: 2px;
   }
+
   .inputField {
     width: 100%;
     font-size: 1em;
@@ -122,6 +123,7 @@ body{
     outline: none;
     border: 1px solid var(--Darkgrayish);
     border-radius: 20px;
+    font-family: var(--Family);
   }
   .exp_cvccontainer{
     width: fit-content;
@@ -135,11 +137,20 @@ body{
     display: flex;
     gap: 1rem;
   }
+  .err{
+    width: 100%;
+    color: var(--Red);
+    font-size: 20px;
+    text-align: right;
+  }
 .button{
-    padding: 3rem;
+    width: 100%;
+    padding: 2rem;
     background-color: var(--Verydark);
     color: white;
-    font-size: 2.5em;
+    font-size: 2em;
+    font-family: var(--Family);
+    border-radius: 8px;
 }
 @media (min-width:1400px){
     .App{
@@ -169,5 +180,12 @@ align-items: center;
     .formLabel{
         font-size: 16px;
         gap: 10px;
+    }
+    .button{
+       padding: 1rem; 
+       font-size: 18px;
+    }
+    .err{
+        font-size: 14px;
     }
 }
