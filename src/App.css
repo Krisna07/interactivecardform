@@ -152,6 +152,15 @@ body{
     font-family: var(--Family);
     border-radius: 8px;
 }
+.complete{
+  width: 400px;
+  height: 200px;
+  position: absolute;
+  right: 15%;
+  bottom: 30%;
+
+}
+
 @media (min-width:1400px){
     .App{
         grid-template-columns: 1fr 2fr;

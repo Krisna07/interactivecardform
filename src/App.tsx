@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import "./App.css";
 import Card from "./Components/Card";
 import Cardback from "./Components/Cardback";
+import Success from "./Components/Success";
 interface cardDetails {
   cardnumber: string;
   cardname: string;
@@ -32,9 +33,9 @@ function App() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setCardDetails((prevState) => ({ ...prevState, [name]: value }));
-    validateForm();
   };
   const [rotate, setRotate] = useState<string>("");
+
   const validateForm = () => {
     let isValid = true;
     let errors = {
@@ -90,10 +91,15 @@ function App() {
     setErr(errors);
     return isValid;
   };
+  const [success, setSucess] = useState();
+  const [btnText, setBtnText] = useState("Confirm");
+
   const submitForm = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
-    rotate ? setRotate("0deg") : setRotate("360deg");
+
     if (validateForm()) {
+      rotate ? setRotate("0deg") : setRotate("360deg");
+      setBtnText("Continue");
     }
   };
   return (
@@ -102,6 +108,7 @@ function App() {
         <Card cardDetails={cardDetails} rotate={rotate} />
         <Cardback cvv={cardDetails.cvv} rotate={rotate} />
       </div>
+      <Success />
       <div className="rightForm">
         <form className="form" onSubmit={submitForm}>
           <label className="formLabel">
@@ -113,7 +120,6 @@ function App() {
               placeholder={"eg. FIRSTNAME LASTNAME"}
               value={cardDetails.cardname}
               onChange={handleChange}
-              onInput={validateForm}
               maxLength={18}
             />
             {err.nameErr ? <span className="err">{err.nameErr}</span> : ""}
@@ -127,7 +133,6 @@ function App() {
               placeholder={"eg. 1234567890987654"}
               value={cardDetails.cardnumber}
               onChange={handleChange}
-              onInput={validateForm}
               max={9999999999999999}
               min={"0000000000000000"}
               maxLength={16}
@@ -150,7 +155,6 @@ function App() {
                   maxLength={2}
                   max={12}
                   onChange={handleChange}
-                  onInput={validateForm}
                 />
                 <input
                   type="string"
@@ -161,7 +165,6 @@ function App() {
                   maxLength={2}
                   value={cardDetails.year}
                   onChange={handleChange}
-                  onInput={validateForm}
                 />
               </div>
               {err.dateErr ? <span className="err">{err.dateErr}</span> : ""}
@@ -173,7 +176,6 @@ function App() {
                 className="inputField"
                 name={"cvv"}
                 onChange={handleChange}
-                onInput={validateForm}
                 value={cardDetails.cvv}
                 placeholder={"eg. 123"}
                 minLength={3}
@@ -183,7 +185,7 @@ function App() {
             </label>
           </div>
           <button type="submit" className="button">
-            Confirm
+            {btnText}
           </button>
         </form>
       </div>
