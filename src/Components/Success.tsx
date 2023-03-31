@@ -4,13 +4,30 @@ const Success = () => {
   return (
     <div className="complete">
       <svg
-        width="160"
-        height="160"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 80 80"
+        width="400"
+        height="400"
       >
         <circle cx="40" cy="40" r="40" fill="url(#a)" />
-        <path d="M28 39.92 36.08 48l16-16" stroke="#fff" stroke-width="3" />
+        <path
+          className="checkmark"
+          d="M28 39.92 36.08 48l16-16"
+          stroke="#fff"
+          strokeWidth="3"
+          strokeDasharray="50,50"
+          strokeDashoffset="-50"
+        >
+          <animate
+            attributeName="stroke-dashoffset"
+            from="-50"
+            to="0"
+            dur="0.5s"
+            begin="click"
+            fill="freeze"
+          />
+        </path>
         <defs>
           <linearGradient
             id="a"
@@ -20,8 +37,8 @@ const Success = () => {
             y2="91.507"
             gradientUnits="userSpaceOnUse"
           >
-            <stop stop-color="#6348FE" />
-            <stop offset="1" stop-color="#610595" />
+            <stop stopColor="#6348FE" />
+            <stop offset="1" stopColor="#610595" />
           </linearGradient>
         </defs>
       </svg>

@@ -91,15 +91,31 @@ function App() {
     setErr(errors);
     return isValid;
   };
-  const [success, setSucess] = useState();
-  const [btnText, setBtnText] = useState("Confirm");
+  const [success, setSucess] = useState<Boolean>(false);
+  const [btnText, setBtnText] = useState<String>("Confirm");
 
   const submitForm = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (validateForm()) {
-      rotate ? setRotate("0deg") : setRotate("360deg");
       setBtnText("Continue");
+      setSucess(true);
+      rotate ? setRotate("0deg") : setRotate("360deg");
+    } else {
+      return;
+    }
+    if (!success) {
+      setBtnText("Continue");
+    } else {
+      setSucess(!success);
+      setBtnText("Confirm");
+      setCardDetails({
+        cardname: "",
+        cardnumber: "",
+        month: "",
+        year: "",
+        cvv: "",
+      });
     }
   };
   return (
@@ -108,82 +124,92 @@ function App() {
         <Card cardDetails={cardDetails} rotate={rotate} />
         <Cardback cvv={cardDetails.cvv} rotate={rotate} />
       </div>
-      <Success />
+
       <div className="rightForm">
         <form className="form" onSubmit={submitForm}>
-          <label className="formLabel">
-            CARDHOLDER NAME
-            <input
-              type="text"
-              className="inputField"
-              name={"cardname"}
-              placeholder={"eg. FIRSTNAME LASTNAME"}
-              value={cardDetails.cardname}
-              onChange={handleChange}
-              maxLength={18}
-            />
-            {err.nameErr ? <span className="err">{err.nameErr}</span> : ""}
-          </label>
-          <label className="formLabel">
-            CARD NUMBER
-            <input
-              type="string"
-              className="inputField"
-              name={"cardnumber"}
-              placeholder={"eg. 1234567890987654"}
-              value={cardDetails.cardnumber}
-              onChange={handleChange}
-              max={9999999999999999}
-              min={"0000000000000000"}
-              maxLength={16}
-              required
-            />
-            {err.numErr ? <span className="err">{err.numErr}</span> : ""}
-          </label>
-          <div className="exp_cvccontainer">
-            <label className="formLabel">
-              EXP. DATE (MM/YY)
-              <div className="expInput">
+          {success ? (
+            <Success />
+          ) : (
+            <div className="formLabels">
+              <label className="formLabel">
+                CARDHOLDER NAME
+                <input
+                  type="text"
+                  className="inputField"
+                  name={"cardname"}
+                  placeholder={"eg. FIRSTNAME LASTNAME"}
+                  value={cardDetails.cardname}
+                  onChange={handleChange}
+                  maxLength={18}
+                />
+                {err.nameErr ? <span className="err">{err.nameErr}</span> : ""}
+              </label>
+              <label className="formLabel">
+                CARD NUMBER
                 <input
                   type="string"
                   className="inputField"
-                  name={"month"}
-                  value={cardDetails.month}
-                  placeholder="MM"
-                  min={0}
-                  minLength={1}
-                  maxLength={2}
-                  max={12}
+                  name={"cardnumber"}
+                  placeholder={"eg. 1234567890987654"}
+                  value={cardDetails.cardnumber}
                   onChange={handleChange}
+                  max={9999999999999999}
+                  min={"0000000000000000"}
+                  maxLength={16}
+                  required
                 />
-                <input
-                  type="string"
-                  className="inputField"
-                  placeholder="YY"
-                  name={"year"}
-                  minLength={1}
-                  maxLength={2}
-                  value={cardDetails.year}
-                  onChange={handleChange}
-                />
+                {err.numErr ? <span className="err">{err.numErr}</span> : ""}
+              </label>
+              <div className="exp_cvccontainer">
+                <label className="formLabel">
+                  EXP. DATE (MM/YY)
+                  <div className="expInput">
+                    <input
+                      type="string"
+                      className="inputField"
+                      name={"month"}
+                      value={cardDetails.month}
+                      placeholder="MM"
+                      min={0}
+                      minLength={1}
+                      maxLength={2}
+                      max={12}
+                      onChange={handleChange}
+                    />
+                    <input
+                      type="string"
+                      className="inputField"
+                      placeholder="YY"
+                      name={"year"}
+                      minLength={1}
+                      maxLength={2}
+                      value={cardDetails.year}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  {err.dateErr ? (
+                    <span className="err">{err.dateErr}</span>
+                  ) : (
+                    ""
+                  )}
+                </label>
+                <label className="formLabel">
+                  CVV
+                  <input
+                    type="string"
+                    className="inputField"
+                    name={"cvv"}
+                    onChange={handleChange}
+                    value={cardDetails.cvv}
+                    placeholder={"eg. 123"}
+                    minLength={3}
+                    maxLength={3}
+                  />
+                  {err.cvvErr ? <span className="err">{err.cvvErr}</span> : ""}
+                </label>
               </div>
-              {err.dateErr ? <span className="err">{err.dateErr}</span> : ""}
-            </label>
-            <label className="formLabel">
-              CVC
-              <input
-                type="string"
-                className="inputField"
-                name={"cvv"}
-                onChange={handleChange}
-                value={cardDetails.cvv}
-                placeholder={"eg. 123"}
-                minLength={3}
-                maxLength={3}
-              />
-              {err.cvvErr ? <span className="err">{err.cvvErr}</span> : ""}
-            </label>
-          </div>
+            </div>
+          )}
           <button type="submit" className="button">
             {btnText}
           </button>
